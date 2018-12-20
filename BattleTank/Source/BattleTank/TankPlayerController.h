@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "Tank.h"
+#include "Engine/World.h"
 #include "TankPlayerController.generated.h"
 
 /**
@@ -16,7 +17,6 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
-	ATank* GetControlledTank() const;
 
 	virtual void BeginPlay() override;
 
@@ -24,6 +24,23 @@ public:
 
 
 private:
+	ATank* GetControlledTank() const;
 	//start the tank moving the barrel so that a shot would hit where the crosshairs intersects the world
 	void AimTowardsCrosshair();
+	
+	//return and OUT parameter, true if hit landscape
+	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = 0.5;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairYLocation = 0.3333;
+
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 1000000;
+
+	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
+
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const;
 };
