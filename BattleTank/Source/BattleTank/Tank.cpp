@@ -3,26 +3,27 @@
 #include "Tank.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
-#include "TankAimingComponent.h"
-#include "TankMovementComponent.h"
 
 // Sets default values
 ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+
+	auto TankName = GetName();
 }
-
-
-void ATank::AimAt(FVector OutHitLocation)
+void ATank::BeginPlay()
 {
-	TankAimingComponent->AimAt(OutHitLocation, LaunchSpeed);
+	Super::BeginPlay(); // Needed for BP begin play to run
+
 }
+
 
 void ATank::Fire()
 {
+	if (!ensure(Barrel)) { return; }
 	bool isReloaded = FPlatformTime::Seconds() - LastFireTime > ReloadTimeInSeconds;
-	if (Barrel && isReloaded)
+	if (isReloaded)
 	{
 		//spawn a projectile at the socket location
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
