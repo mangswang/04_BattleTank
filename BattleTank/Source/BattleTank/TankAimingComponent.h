@@ -36,6 +36,7 @@ public:
 
 	virtual void BeginPlay() override;
 
+	EFiringState GetFiringState() const;
 
 
 protected:
