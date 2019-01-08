@@ -57,10 +57,11 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 }
 
 
-void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
+void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet, TSubclassOf<AProjectile> ProjectileToSet)
 {
 	Barrel = BarrelToSet;
 	Turret = TurretToSet;
+	ProjectileBlueprint = ProjectileToSet;
 }
 
 

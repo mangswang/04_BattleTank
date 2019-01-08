@@ -11,6 +11,7 @@ class UStaticMeshComponent;
 class UProjectileMovementComponent;
 class URadialForceComponent;
 
+
 UCLASS()
 class BATTLETANK_API AProjectile : public AActor
 {
@@ -22,12 +23,12 @@ public:
 
 	void LaunchProjectile(float Speed);
 
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
+
 
 private:	
 	UFUNCTION()
@@ -49,4 +50,5 @@ private:
 	UParticleSystemComponent* ImpactBlast = nullptr;
 	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = true))
 	URadialForceComponent* ExplosionForce = nullptr;
+
 };

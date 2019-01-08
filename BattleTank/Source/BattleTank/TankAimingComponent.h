@@ -28,7 +28,7 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 
 public:	
 	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet, TSubclassOf<AProjectile> ProjectileToSet);
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
@@ -69,7 +69,7 @@ private:
 	float LaunchSpeed = 6000;
 
 	UPROPERTY(EditAnywhere, Category = "Setup")
-	TSubclassOf<AProjectile> ProjectileBlueprint;
+	TSubclassOf<AProjectile> ProjectileBlueprint = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
